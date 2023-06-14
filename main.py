@@ -9,16 +9,16 @@ from sqlalchemy.orm import relationship, Mapped
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
-import smtplib
+import os
 
 # Building application using flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///user.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 db = SQLAlchemy(app)
@@ -80,7 +80,8 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer,db.ForeignKey('blog_posts.id'), nullable=False)
     child_comments = relationship('BlogPost',back_populates='comments')
 
-# db.create_all()
+with app.app_context():
+    db.create_all()
 
 # config flask login
 @loginmanager.user_loader
