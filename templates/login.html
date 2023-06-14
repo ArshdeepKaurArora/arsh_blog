@@ -31,9 +31,9 @@
             {% endfor %}
         {% endif %}
         {% endwith %}
-        
-        {{form.csrf_token}}
+      
         {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        
       </div>
     </div>
   </div>
