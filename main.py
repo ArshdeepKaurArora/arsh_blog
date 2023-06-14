@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from functools import wraps
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
@@ -9,6 +9,7 @@ from sqlalchemy.orm import relationship, Mapped
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
+import smtplib
 
 # Building application using flask
 app = Flask(__name__)
@@ -173,7 +174,7 @@ def about():
     return render_template("about.html",current_user=current_user)
 
 # Webpage for contact information
-@app.route("/contact")
+@app.route("/contact",methods=['GET','POST'])
 def contact():
     return render_template("contact.html",current_user=current_user)
 
