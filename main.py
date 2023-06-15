@@ -17,6 +17,9 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
+# email id
+email = os.environ.get("Email")
+
 # collecting data from environment
 uri = os.getenv("DATABASE_URL")
 if uri.startswith("postgres://"):
@@ -182,7 +185,7 @@ def about():
 # Webpage for contact information
 @app.route("/contact",methods=['GET','POST'])
 def contact():
-    return render_template("contact.html",current_user=current_user)
+    return render_template("contact.html",current_user=current_user, email=email)
 
 # For adding new post(admin only)
 @app.route("/new-post",methods=['GET','POST'])
