@@ -10,7 +10,7 @@ Please click [here](https://arsh-blog-wc7z.onrender.com) to visit my blog.
 
 When you are at the home page, click on the post you want to read in detail.
 
-You can also leave comments below my post but don't forget to register your email id first unless you won't be able to add your comment.
+You can also leave comments below my post but don't forget to register your email id first otherwise you won't be able to add your comment.
 
 ## Why the project is userful?
 
